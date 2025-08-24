@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import Footer from '../components/Footer';
+import Header from '../components/Header.tsx';
+import Hero from '../components/Hero.tsx';
+import Footer from '../components/Footer.tsx';
 
 const SolarPage: React.FC = () => {
   return (
