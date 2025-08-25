@@ -1,0 +1,23 @@
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: var(--grid-gap);
+}
+.app-card {
+  background: var(--gray-0);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: var(--sp-5);
+  transition: transform var(--duration-1) var(--ease-out);
+}
+.app-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.app-card h3 {
+  font-size: var(--fs-700);
+}
+.app-card p {
+  color: var(--gray-600);
+}

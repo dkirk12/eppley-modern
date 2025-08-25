@@ -1,0 +1,4 @@
+
+.app-card { text-align: left; }
+.app-card .icon { font-size: 28px; margin-bottom: var(--sp-3); }
+.app-card h3 { font-size: var(--fs-700); margin: 0 0 var(--sp-2) 0; }

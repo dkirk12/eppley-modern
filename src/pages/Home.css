@@ -1,0 +1,12 @@
+.alt {
+  background: var(--gray-100);
+  padding: var(--sp-10) var(--sp-4);
+}
+.center {
+  text-align: center;
+}
+.btn.primary {
+  background: var(--yellow);
+  color: var(--black);
+  border: none;
+}

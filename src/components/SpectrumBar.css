@@ -1,0 +1,6 @@
+
+.spectrum .bar { height: 20px; border-radius: var(--radius); margin-bottom: var(--sp-2);
+  background: linear-gradient(90deg, #7F00FF 0%, #0040FF 15%, #00B050 40%, #E5E500 65%, #FFA500 80%, #FF0000 100%);
+  border: 1px solid var(--gray-200);
+}
+.spectrum .ticks { display: flex; justify-content: space-between; font-size: var(--fs-300); color: var(--gray-800); }

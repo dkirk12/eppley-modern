@@ -1,0 +1,4 @@
+
+.timeline .row { display: grid; grid-template-columns: 140px 1fr; gap: var(--sp-4); padding-block: var(--sp-3); border-bottom: 1px solid var(--gray-200); }
+.timeline .year { color: var(--black); font-weight: 800; letter-spacing: .02em; }
+.timeline .text { color: var(--gray-800); }

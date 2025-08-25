@@ -1,37 +1,39 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Header from '../components/Header.tsx';
 import Hero from '../components/Hero.tsx';
 import Footer from '../components/Footer.tsx';
-import { Link } from 'react-router-dom';
+import { instruments as allInstruments } from '../data/instruments.ts';
+import InstrumentCard from '../components/InstrumentCard.tsx';
+import InstrumentsFilterBar from '../components/InstrumentsFilterBar.tsx';
 
 const InstrumentsPage: React.FC = () => {
+  const [query, setQuery] = useState('');
+  const [type, setType] = useState('All');
+  const [sort, setSort] = useState('A-Z');
+
+  const types = useMemo(() => Array.from(new Set(allInstruments.map(i => i.type).filter(Boolean))) as string[], []);
+
+  const instruments = useMemo(() => {
+    let items = allInstruments.slice();
+    if (type !== 'All') items = items.filter(i => i.type === type);
+    if (query) items = items.filter(i => (i.title + ' ' + (i.description||'') + ' ' + (i.tags||[]).join(' ')).toLowerCase().includes(query.toLowerCase()));
+    items.sort((a,b) => sort === 'A-Z' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
+    return items;
+  }, [query, type, sort]);
+
   return (
     <>
       <Header />
-      <Hero
-        image="/assets/radiation-background.png"
-        title="Our Instruments"
-        subtitle="Precision radiometers for measuring solar and terrestrial energy"
-      />
-      <main>
-        <section>
-          <h2>Instrument Catalogue</h2>
-          <p>
-            The following instruments represent our current product line. Click each instrument for a data sheet
-            and detailed specifications. If you require a configuration not listed here, please contact us for
-            assistance.
-          </p>
-          <ul>
-            <li><Link to="/instruments/smt">Automatic Solar Tracker (SMT)</Link></li>
-            <li><Link to="/instruments/black-white">Black &amp; White Pyranometer (8‑48)</Link></li>
-            <li><Link to="/instruments/gpp">Global Precision Pyranometer (GPP)</Link></li>
-            <li><Link to="/instruments/spp">Standard Precision Pyranometer (SPP)</Link></li>
-            <li><Link to="/instruments/snipt">Normal Incidence Pyrheliometer (sNIP)</Link></li>
-            <li><Link to="/instruments/pir">Precision Infrared Radiometer (PIR)</Link></li>
-            <li><Link to="/instruments/tuvr">Total Ultraviolet Radiometer (TUVR)</Link></li>
-            <li><Link to="/instruments/sdk">Shade Disk Kit (SDK)</Link></li>
-            <li><Link to="/instruments/ven">Ventilator (VEN)</Link></li>
-          </ul>
+      <Hero title="Our Instruments" subtitle="Precision radiometers for measuring solar and terrestrial energy" kicker="Catalogue" compact />
+      <main id="main">
+        <section className="section container">
+          <InstrumentsFilterBar
+            allTypes={types}
+            onChange={(q, t, s)=>{ setQuery(q); setType(t); setSort(s); }}
+          />
+          <div className="grid">
+            {instruments.map(inst => <InstrumentCard key={inst.slug} {...inst} />)}
+          </div>
         </section>
       </main>
       <Footer />

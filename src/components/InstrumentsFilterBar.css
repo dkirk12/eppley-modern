@@ -1,0 +1,16 @@
+
+.filterbar {
+  display: grid;
+  grid-template-columns: 1fr 180px 140px;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+}
+.filterbar input, .filterbar select {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  font-size: var(--fs-500);
+}
+@media (max-width: 760px) {
+  .filterbar { grid-template-columns: 1fr; }
+}
